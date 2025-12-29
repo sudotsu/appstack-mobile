@@ -4,6 +4,24 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen;
+    @apply bg-dark-bg text-gray-100 min-h-screen;
+  }
+  
+  /* Custom scrollbar for dark mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-surface;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-muted rounded;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-600;
   }
 }

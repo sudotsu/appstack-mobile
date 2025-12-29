@@ -14,8 +14,8 @@ export interface Challenge {
   starterCode: string;
   hints: string[];
   solution: string;
-  realWorldUse: string;
-  aiCollaborationTip: string;
+  realWorldContext: string; // What you'll actually encounter
+  collaborationPhilosophy: string; // How AI helps with this
   unlocks: string[];
   requires: string[];
 }
@@ -27,7 +27,7 @@ export const CURRICULUM: Challenge[] = [
     week: 1,
     day: 1,
     title: 'Just Enough TypeScript',
-    subtitle: 'Read AI code without breaking it',
+    subtitle: 'Read AI-generated code without breaking it',
     category: 'foundation',
     difficulty: 'beginner',
     estimatedTime: 30,
@@ -59,8 +59,8 @@ interface User {
   email: string;
   isActive: boolean;
 }`,
-    realWorldUse: 'When Claude generates code, you\'ll see type errors. This lets you fix them instantly.',
-    aiCollaborationTip: 'Tell Claude: "Add TypeScript types to this" - it\'ll do it perfectly. You just need to understand WHAT it did.',
+    realWorldContext: `When your AI generates code, you'll see red squiggly lines - these are type errors, not bugs. They're TypeScript helping you catch mistakes BEFORE your code runs. Every project has these. Common ones you'll see: "Property 'x' does not exist", "Type 'string' is not assignable to type 'number'". Don't panic - just read the error, understand what it wants, fix it. Your build will compile with warnings sometimes - that's normal. Production apps ship with warnings all the time.`,
+    collaborationPhilosophy: `Your AI can write TypeScript perfectly. But YOU need to read what it wrote. When you see type errors: (1) Read the error message - it tells you exactly what's wrong, (2) Ask your AI: "Fix these type errors" if stuck, (3) But try to understand WHY before moving on. You're not memorizing syntax - you're learning to read and understand what AI builds for you.`,
     unlocks: ['w1d2-react-components'],
     requires: []
   },
@@ -70,7 +70,7 @@ interface User {
     week: 1,
     day: 2,
     title: 'Components Are Building Blocks',
-    subtitle: 'Understand what Claude is creating',
+    subtitle: 'Understand what AI is creating',
     category: 'foundation',
     difficulty: 'beginner',
     estimatedTime: 45,
@@ -103,8 +103,8 @@ const Card: React.FC<CardProps> = ({ name, role, avatar }) => {
     </div>
   );
 };`,
-    realWorldUse: 'Every UI element is a component. Understanding this lets you prompt: "Make me a component for X"',
-    aiCollaborationTip: 'Instead of "build me a user profile page", say "create a UserProfile component that takes user data as props"',
+    realWorldContext: `Every UI element is a component - buttons, forms, cards, modals, everything. You'll see "Warning: Each child in a list should have a unique 'key' prop" constantly - it's React's most common warning. Not a blocker, just React asking you to help it track items. Your components will re-render A LOT - that's normal and fine. Only optimize if you see actual lag. Hot reload (auto-refresh when you save) breaks sometimes - just manually refresh the page. That's development life.`,
+    collaborationPhilosophy: `Instead of saying "build me a user profile page", tell your AI: "create a UserProfile component that takes user data as props and displays name, email, avatar". The more specific your ask, the better the output. When AI builds a component, ask it: "What does each prop do?" and "What happens if I don't pass X?". Understanding props = understanding how to compose components = understanding 80% of React.`,
     unlocks: ['w1d3-tailwind-styling'],
     requires: ['w1d1-typescript-basics']
   },
@@ -153,8 +153,8 @@ const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
     </button>
   );
 };`,
-    realWorldUse: 'When Claude builds ugly UIs, you can instantly improve them by tweaking Tailwind classes',
-    aiCollaborationTip: 'Tell Claude your design preferences: "Use blue as primary color, rounded corners, shadow effects"',
+    realWorldContext: 'When Claude builds ugly UIs, you can instantly improve them by tweaking Tailwind classes',
+    collaborationPhilosophy: 'Tell Claude your design preferences: "Use blue as primary color, rounded corners, shadow effects"',
     unlocks: ['w1d4-reading-ai-code'],
     requires: ['w1d2-react-components']
   },
@@ -200,8 +200,8 @@ function getActiveItems<T extends { isActive: boolean }>(items: T[]): T[] {
 function getActiveItems<T extends { isActive: boolean }>(items: T[]): T[] {
   return items.filter(item => item.isActive);
 }`,
-    realWorldUse: 'When you ask Claude to build something, you need to understand what it made so you can modify it later',
-    aiCollaborationTip: 'Always ask Claude: "Explain this code like I\'m learning" - it\'ll break down exactly what it did',
+    realWorldContext: 'When you ask Claude to build something, you need to understand what it made so you can modify it later',
+    collaborationPhilosophy: 'Always ask Claude: "Explain this code like I\'m learning" - it\'ll break down exactly what it did',
     unlocks: ['w1d5-debugging-ai'],
     requires: ['w1d1-typescript-basics']
   },
@@ -269,8 +269,8 @@ function getTotalPrice(products: Product[]): number {
 function getTotalPriceBetter(products: Product[]): number {
   return products.reduce((total, product) => total + product.price, 0);
 }`,
-    realWorldUse: 'AI code often has off-by-one errors, null references, or type mismatches. Spotting these saves hours.',
-    aiCollaborationTip: 'Copy the error message to Claude and say: "Fix this error" - but understanding WHY helps you catch it next time',
+    realWorldContext: 'AI code often has off-by-one errors, null references, or type mismatches. Spotting these saves hours.',
+    collaborationPhilosophy: 'Copy the error message to Claude and say: "Fix this error" - but understanding WHY helps you catch it next time',
     unlocks: ['w2d6-state-management'],
     requires: ['w1d4-reading-ai-code']
   },
@@ -323,8 +323,8 @@ const LikeButton: React.FC = () => {
     </button>
   );
 };`,
-    realWorldUse: 'Every interactive UI element uses state: forms, toggles, modals, counters, filters.',
-    aiCollaborationTip: 'Tell Claude: "I need a component that tracks X and updates when Y happens" - it\'ll set up state correctly',
+    realWorldContext: 'Every interactive UI element uses state: forms, toggles, modals, counters, filters.',
+    collaborationPhilosophy: 'Tell Claude: "I need a component that tracks X and updates when Y happens" - it\'ll set up state correctly',
     unlocks: ['w2d7-dynamic-lists'],
     requires: ['w1d5-debugging-ai']
   },
@@ -415,8 +415,8 @@ const TaskList: React.FC = () => {
     </div>
   );
 };`,
-    realWorldUse: 'Product lists, user feeds, comment sections - all dynamic lists rendered from arrays.',
-    aiCollaborationTip: 'Show Claude your data structure and say: "Create a component that displays this list" - it handles the mapping',
+    realWorldContext: 'Product lists, user feeds, comment sections - all dynamic lists rendered from arrays.',
+    collaborationPhilosophy: 'Show Claude your data structure and say: "Create a component that displays this list" - it handles the mapping',
     unlocks: ['w2d8-forms'],
     requires: ['w2d6-state-management']
   },
